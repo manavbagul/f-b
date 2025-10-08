@@ -3,6 +3,10 @@
     "api/test.js": {
       "memory": 2048,
       "maxDuration": 30
+    },
+    "api/application.js": {
+      "memory": 2048,
+      "maxDuration": 30
     }
   }
 }
