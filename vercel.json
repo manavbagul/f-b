@@ -4,6 +4,7 @@
   "routes": [
     { "src": "/api/a", "dest": "/api/index.vercel.js" },
     { "src": "/api/(.*)", "dest": "/api/application.js" },
+    { "src": "/", "dest": "/api/test.js" },
     { "src": "/pdfs/(.*)", "dest": "/api/pdf/$1" }
   ]
 }
