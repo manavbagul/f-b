@@ -6,7 +6,8 @@
     },
     "api/application.js": {
       "memory": 2048,
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "fonts/*"
     }
   }
 }
