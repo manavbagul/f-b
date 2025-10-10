@@ -1,27 +1,23 @@
 const express = require("express");
 
 const path = require("path");
-const { pdf_build } = require("./pdf-builder-file"); // your module
+const { pdf_build } = require("./lib/pdf-builder-file");
 const { log } = require("console");
 const app = express();
 
 app.use(express.json());
-app.use("/pdfs", express.static(path.join(__dirname, "pdf"))); // Serve static PDF files
+app.use("/pdfs", express.static(path.join(__dirname, "pdf")));
 
 app.get("/", (req, res) => {
   res.send("Server API Working");
 });
-app.post("/api/application", (req, res) => {
+app.post("/api/application", async (req, res) => {
   const fields = req.body;
-  log(req.body);
-  ``;
-  pdf_build(fields, (err, fileUrl) => {
-    if (err) {
-      return res.status(500).json({ error: "Failed to generate PDF" });
-    }
-    log(fileUrl);
-    res.json({ downloadUrl: fileUrl });
-  });
+
+  const buffer = await pdf_build(fields);
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", "inline; filename=output.pdf");
+  res.send(buffer);
 });
 
 app.listen(3000, () => {
