@@ -6,10 +6,15 @@ export default async function handler(req, res) {
     return;
   }
 
+  console.log("applciation try");
+
   try {
     const fields = req.body;
 
+    console.log("pdf build ");
     const buffer = await pdf_build(fields); // returns Buffer
+
+    console.log("odfafter");
 
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", "inline; filename=output.pdf");
